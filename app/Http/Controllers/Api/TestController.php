@@ -18,7 +18,8 @@ class TestController extends Controller
         return response()->json(['tests' => $tests]);
     }
 
-    public function createTest(Request $request){
+    public function createTest(Request $request)
+    {
         $request->validate([
             'TestName' => 'required|string|max:255',
         ]);
@@ -60,7 +61,7 @@ class TestController extends Controller
 
     public function showQuestions($id)
     {
-        $testQuestions = Question::where('test_id',$id)->get();
+        $testQuestions = Question::where('test_id', $id)->get();
 
         return response()->json(['testQuestions' => $testQuestions]);
     }
@@ -140,9 +141,9 @@ class TestController extends Controller
         $questions = Question::where('test_id', $testId)->get();
 
         $userAnswers = UserAnswer::where('UserTestID', 1)
-                                 ->whereIn('QuestionID', $questions->pluck('id')->toArray())
-                                 ->get()
-                                 ->keyBy('QuestionID');
+            ->whereIn('QuestionID', $questions->pluck('id')->toArray())
+            ->get()
+            ->keyBy('QuestionID');
 
         return response()->json([
             'test' => $test,
@@ -150,6 +151,4 @@ class TestController extends Controller
             'userAnswers' => $userAnswers
         ]);
     }
-
-
 }
