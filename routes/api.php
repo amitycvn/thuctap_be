@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ResultController;
 
 
+    Route::get('/approval', [ApprovalController::class, 'getApprovalDataByPublicKey']);
+
     Route::apiResource('tests', TestController::class);
 
 
@@ -42,6 +44,8 @@ use App\Http\Controllers\Api\ResultController;
 
 
     });
+
+    
 
 
 
