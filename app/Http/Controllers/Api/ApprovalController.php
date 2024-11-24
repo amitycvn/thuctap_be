@@ -65,4 +65,27 @@ class ApprovalController extends Controller
 
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
+
+    public function getApprovalDataByPublicKey(Request $request)
+    {
+        // Lấy public_key từ tham số query string
+        $publicKey = $request->input('public_key');
+
+        // Truy vấn tổng số bản ghi theo public_key
+        $totalRecords = Approval::where('public_key', $publicKey)->count();
+
+        // Kiểm tra nếu không có bản ghi nào với public_key
+        if ($totalRecords === 0) {
+            return response()->json([
+                'message' => 'No records found for the given public key.'
+            ], 404);
+        }
+
+        // Trả về public_key và tổng số bản ghi
+        return response()->json([
+            'public_key' => $publicKey,
+            'total_records' => $totalRecords
+        ]);
+    }  
+    
 }
