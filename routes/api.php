@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\QuestionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\ResultController;
 
+    Route::post('/reward-milestone-history', [ApprovalController::class, 'addRewardMilestoneHistory']);
 
     Route::get('/approval', [ApprovalController::class, 'getApprovalDataByPublicKey']);
 
